@@ -1,5 +1,6 @@
 package com.example.sbmdb.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,5 +24,10 @@ public class PostService {
 	
 	public List<Post> findByTitle(String text){
 		return rep.findByTitle(text);
+	}
+	
+	public List<Post> fullSearch(String text, Date mindate, Date maxdate){
+		maxdate = new Date(maxdate.getTime()+24 * 60 * 60 * 1000);
+		return rep.fullSearch(text, mindate, maxdate);
 	}
 }
