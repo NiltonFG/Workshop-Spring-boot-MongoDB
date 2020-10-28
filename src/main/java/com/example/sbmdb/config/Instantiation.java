@@ -1,6 +1,7 @@
 package com.example.sbmdb.config;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TimeZone;
 
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import com.example.sbmdb.domain.Post;
 import com.example.sbmdb.domain.User;
 import com.example.sbmdb.dto.AuthorDTO;
+import com.example.sbmdb.dto.CommentDTO;
 import com.example.sbmdb.repository.PostRepository;
 import com.example.sbmdb.repository.UserRepository;
 
@@ -39,6 +41,13 @@ public class Instantiation implements CommandLineRunner{
 		
 		Post post1 = new Post(null,sdf.parse("21/03/2020"),"partiu sp","viagem braba dms",new AuthorDTO(maria));
 		Post post2 = new Post(null,sdf.parse("21/03/2020"),"bom dia!","Acordei feliz!",new AuthorDTO(maria));
+		
+		CommentDTO c1 = new CommentDTO("boa viagem man", sdf.parse("25/03/2019"), new AuthorDTO(alex));
+		CommentDTO c2 = new CommentDTO("boa viagem", sdf.parse("22/03/2019"), new AuthorDTO(bob));
+		CommentDTO c3 = new CommentDTO("tenha um bom fds", sdf.parse("27/03/2019"), new AuthorDTO(alex));
+		
+		post1.getComments().addAll(Arrays.asList(c1,c2));
+		post2.getComments().addAll(Arrays.asList(c3));
 		
 		postRepository.saveAll(Arrays.asList(post1,post2));
 		
